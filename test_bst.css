@@ -32,11 +32,6 @@ body {
     color: white;
 }
 
-#input-data, #output-data {
-    min-height: 25vh;
-    max-height: 50vh;
-}
-
 /* Formatting for .#control-panel. */
 #control-panel-left, #control-panel-right {
     width: 48%;
@@ -46,6 +41,14 @@ body {
     float: left;
 }
 
+#control-panel button, #control-panel label {
+    padding: 0;
+    width: 25%;
+}
+
+#control-panel input[type=checkbox] {
+    margin: 0;
+}
 #control-panel-right {
     float: right;
 }
@@ -56,11 +59,6 @@ body {
     margin-bottom: 2px;
 }
 
-#control-panel button, #control-panel label {
-    padding: 0;
-    width: 25%;
-}
-
 #control-panel input[type=text] {
     width: 70%;
 }
@@ -69,5 +67,15 @@ body {
 }
 
 /* Formatting for #input-data. */
+#input-data {
+    min-height: 10vh;
+    max-height: 25vh;
+    overflow-y: auto;
+}
 
 /* Formatting for #output-data. */
+#output-data {
+    min-height: 25vh;
+    max-height: 50vh;
+    overflow-y: auto;
+}

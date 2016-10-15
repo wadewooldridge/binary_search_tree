@@ -34,11 +34,11 @@
                 <div id="datatype-buttons" class="radio">
                     <label>Data type: </label>
                     <div class="radio-inline">
-                        <input id="datatype-numbers" type="radio" name="data-type" value="0" checked>
+                        <input id="datatype-numbers" type="radio" name="data-type" value="0">
                         <label for="datatype-numbers">Numbers</label>
                     </div>
                     <div class="radio-inline">
-                        <input id="datatype-strings" type="radio" name="data-type" value="1">
+                        <input id="datatype-strings" type="radio" name="data-type" value="1" checked>
                         <label for="datatype-strings">Strings</label>
                     </div>
                     <div class="radio-inline">
@@ -46,15 +46,18 @@
                         <label for="datatype-persons">Persons</label>
                     </div>
                 </div>
-                <hr>
+                <div id="lower-case-checkbox" class="checkbox">
+                    <label>Lower case:</label>
+                    <input  type="checkbox" value="">
+                </div>
                 <button id="clear-button" class="btn btn-primary">Clear</button>
                 <button id="print-button" class="btn btn-primary">Print</button>
                 <button id="graph-button" class="btn btn-primary">Graph</button>
             </div>
 
             <div id="control-panel-right">
-                <div class="button-with-input">
-                    <button id="add-manual-button" class="btn btn-default">Add manual</button>
+                <div id="add-manual-button" class="button-with-input">
+                    <button class="btn btn-default">Add manual</button>
                     <input type="text">
                 </div>
                 <div id="add-random-button" class="button-with-input">
@@ -87,7 +90,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">Output</div>
         <div id="output-data" class="panel-body"></div>
-        <div class="panel-footer"><div>
+        <div class="panel-footer"></div>
     </div>
 </div>
 </body>
