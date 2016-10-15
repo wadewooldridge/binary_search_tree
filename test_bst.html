@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Binary Search Tree Test</title>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="test_bst.css">
+    <script src="binary_search_tree.js"></script>
+    <script src="test_bst.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">BinarySearchTree</a>
+        </div>
+        <ul class="nav navbar-nav">
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="about_bst.html" target="_blank">About</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="col-xs-12 container-fluid">
+    <div class="panel panel-default">
+        <div class="panel-heading">Controls</div>
+        <div id="control-panel" class="panel-body">
+            <div id="control-panel-left">
+                <div id="datatype-buttons" class="radio">
+                    <label>Data type: </label>
+                    <div class="radio-inline">
+                        <input id="datatype-numbers" type="radio" name="data-type" value="0" checked>
+                        <label for="datatype-numbers">Numbers</label>
+                    </div>
+                    <div class="radio-inline">
+                        <input id="datatype-strings" type="radio" name="data-type" value="1">
+                        <label for="datatype-strings">Strings</label>
+                    </div>
+                    <div class="radio-inline">
+                        <input id="datatype-persons" type="radio" name="data-type" value="2">
+                        <label for="datatype-persons">Persons</label>
+                    </div>
+                </div>
+                <hr>
+                <button id="clear-button" class="btn btn-primary">Clear</button>
+                <button id="print-button" class="btn btn-primary">Print</button>
+                <button id="graph-button" class="btn btn-primary">Graph</button>
+            </div>
+
+            <div id="control-panel-right">
+                <div class="button-with-input">
+                    <button id="add-manual-button" class="btn btn-default">Add manual</button>
+                    <input type="text">
+                </div>
+                <div id="add-random-button" class="button-with-input">
+                    <button class="btn btn-default">Add random</button>
+                    <input type="text">
+                </div>
+                <div id="add-file-button" class="button-with-input">
+                    <button class="btn btn-default">Add file</button>
+                    <input type="text">
+                </div>
+                <div id="add-url-button" class="button-with-input">
+                    <button class="btn btn-default">Add URL</button>
+                    <input type="text">
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer"></div>
+    </div>
+</div>
+
+<div class="col-xs-12 container-fluid">
+    <div class="panel panel-default">
+        <div class="panel-heading">Input Data</div>
+        <div id="input-data" class="panel-body"></div>
+        <div class="panel-footer"></div>
+    </div>
+</div>
+
+<div class="col-xs-12 container-fluid">
+    <div class="panel panel-default">
+        <div class="panel-heading">Output</div>
+        <div id="output-data" class="panel-body"></div>
+        <div class="panel-footer"><div>
+    </div>
+</div>
+</body>
+</html>

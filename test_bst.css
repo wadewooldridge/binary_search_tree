@@ -1,0 +1,73 @@
+/* Overall formatting for page. */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #777;
+}
+
+/* Formatting for navbar. */
+.navbar {
+    margin: 0.2em;
+}
+
+.navbar label {
+    color: white;
+}
+
+/* Formatting for main panels. */
+.container-fluid {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+.panel {
+    border: 2px solid black;
+    margin: 0.2em;
+}
+
+.panel > .panel-heading {
+    background-color: black;
+    color: white;
+}
+
+#input-data, #output-data {
+    min-height: 25vh;
+    max-height: 50vh;
+}
+
+/* Formatting for .#control-panel. */
+#control-panel-left, #control-panel-right {
+    width: 48%;
+}
+
+#control-panel-left {
+    float: left;
+}
+
+#control-panel-right {
+    float: right;
+}
+
+.button-with-input {
+    width: 90%;
+    margin-right: 0;
+    margin-bottom: 2px;
+}
+
+#control-panel button, #control-panel label {
+    padding: 0;
+    width: 25%;
+}
+
+#control-panel input[type=text] {
+    width: 70%;
+}
+
+#control-panel label {
+}
+
+/* Formatting for #input-data. */
+
+/* Formatting for #output-data. */
