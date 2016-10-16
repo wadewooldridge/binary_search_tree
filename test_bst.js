@@ -9,11 +9,11 @@ var DATATYPE_NUMBER = 0;
 var DATATYPE_STRING = 1;
 var DATATYPE_PERSON = 2;
 
-var DATATYPE_NAME = ['Number', 'String', 'Person'];
+var DATATYPE_NAME = ['number', 'string', 'person'];
 
 /* Global data */
 gaInputData = [];                       // Just an array of numbers, strings, or objects.
-gaOutputData = null;                    // Not sure yet how this will be stored or expressed.
+gaOutputData = [];                      // Array of returned objects.
 
 // Global data: the datatype of the tree, and the tree itself.
 var gDataType = DATATYPE_STRING;        // Default checked box in HTML.
@@ -21,10 +21,6 @@ var gTree = null;
 
 // Global data: control settings.
 var gForceLowerCase = false;
-
-// Test data to operate on.
-var words = ['now', 'is', 'the', 'time', 'for', 'all', 'good', 'men', 'to', 'come',
-    'to', 'the', 'aid', 'of', 'their', 'party' ];
 
 /* Document ready function to kick everyting off. */
 $(document).ready( function() {
@@ -39,6 +35,7 @@ $(document).ready( function() {
 function addControlPanelHandlers() {
     console.log('addControlPanelHandlers');
 
+    // TODO: Replace these with something that does not produce the "inefficient jQuery' warnings.
     $('#datatype-buttons').change(onDataTypeButtons);
     $('#lower-case-checkbox input').change(onLowerCaseCheckbox);
 
@@ -55,12 +52,12 @@ function addControlPanelHandlers() {
 /* Change placeholders to the control panel text input items, based on data type. */
 function changeControlPanelPlaceholders() {
     console.log('changeControlPanelPlaceholders');
-    var dataTypeName = DATATYPE_NAME[gDataType].toLowerCase();
+    var dataTypeName = DATATYPE_NAME[gDataType];
 
-    $('#add-file-button input').attr('placeholder', 'File to parse for ' + dataTypeName + 's');
     $('#add-manual-button input').attr('placeholder', 'Manual ' + dataTypeName + '(s) to add');
     $('#add-random-button input').attr('placeholder', 'Count of random ' + dataTypeName + 's');
-    $('#add-url-button input').attr('placeholder', 'URL to parse for ' + dataTypeName + 's');
+//
+    $('#add-url-button input').attr('placeholder', 'URL load not current implemented.');
 }
 
 /* Change to a new data type and clear out the old data. */
@@ -92,12 +89,14 @@ function clearInputData() {
     console.log('clearInputData');
     gaInputData = [];
     updateInputDataDisplay();
+    updateInputDataFooter();
 }
 
 /* Clear out the output-data area. */
 function clearOutputData() {
     console.log('clearOutputData');
-    gaOutputData = null;
+    gaOutputData = [];
+    updateOutputDataDisplay();
 }
 
 /* Generate some random numbers to gaInputData. */
@@ -110,6 +109,7 @@ function generateRandomNumbersToInputData(count) {
         gaInputData.push(num);
     }
     updateInputDataDisplay();
+    updateInputDataFooter();
 }
 
 /* Generate some random strings to gaInputData. */
@@ -117,7 +117,7 @@ function generateRandomStringsToInputData(count) {
     console.log('generateRandomStringsToInputData: ' + count);
 
     // Generate random character string from 3 to 8 characters long.
-    var chars = 'aaaabcddeeeefghiiijklmmnnoooopqrrrssstttuuvwxyz'.split('');
+    var chars = 'aaaaabbcdddeeeeeefghiiijkllmmnnooooapqrrrssstttuuvwxyz'.split('');
 
     for (i = 0; i < count; i++) {
         var len = Math.floor(Math.random() * 6) + 3;
@@ -128,7 +128,7 @@ function generateRandomStringsToInputData(count) {
         gaInputData.push(str);
     }
     updateInputDataDisplay();
-
+    updateInputDataFooter();
 }
 
 /* Main program initialization. */
@@ -142,19 +142,7 @@ function initProgram() {
 /* Initialize the BinarySearchTree structure that we are going to use. */
 function initTree() {
     console.log('initTree');
-
     gTree = new BinarySearchTree();
-
-    // NOTE: This is the old manual list of words that we started with.
-    // Process through our list of words and build the tree.
-    for (var i = 0; i < words.length; i++) {
-        var word = words[i];
-        // console.log('Adding word: ' + word);
-        gTree.addWord(word);
-    }
-
-    // Now print the ordered tree.
-    gTree.printTree();
 }
 
 /* Button handler: add-file-button */
@@ -212,7 +200,10 @@ function onAddRandomButton() {
 
 /* Button handler: add-url-button */
 function onAddUrlButton() {
-    console.log('onAddUrlButton');
+    var url = $('#add-url-button input').val();
+    console.log('onAddUrlButton: ' + url);
+
+
 }
 
 /* Button handler: clear-button */
@@ -220,7 +211,10 @@ function onClearButton() {
     console.log('onClearButton');
     clearInputData();
     updateInputDataDisplay();
+    updateInputDataFooter();
     clearOutputData();
+    updateOutputDataDisplay();
+    updateOutputDataFooter();
 }
 
 /* Button handler: datatype-buttons */
@@ -249,6 +243,28 @@ function onLowerCaseCheckbox() {
 /* Button handler: print-button */
 function onPrintButton() {
     console.log('onPrintButton');
+
+    // Initialize the tree and the output data.
+    initTree();
+    clearOutputData();
+
+    // and add all the data to the tree.
+    for (var i = 0; i < gaInputData.length; i++) {
+        gTree.addWord(gaInputData[i]);
+    }
+
+    // Now traverse the tree in sorted order, calling back for each node in turn.
+    gTree.traverseAndCallBack(onPrintCallback);
+
+    // gaOutputData is now updated with the sorted tree.  Update the displays.
+    updateOutputDataDisplay();
+    updateOutputDataFooter();
+}
+
+/* Callback function used by onPrintButton handler */
+function onPrintCallback(retObj) {
+    console.log('onPrintCallback: ', retObj);
+    gaOutputData.push(retObj);
 }
 
 /* Parse input string looking for numbers or strings, and add those to the gaInputData array. */
@@ -282,6 +298,7 @@ function parseStringToInputData(s) {
     }
 
     updateInputDataDisplay();
+    updateInputDataFooter();
 }
 
 /* Update the input data display based on the current value of gaInputData. */
@@ -295,3 +312,29 @@ function updateInputDataDisplay() {
 
     $('#input-data').text(s);
 }
+
+/* Update the input data footer based on the current value of gaInputData. */
+function updateInputDataFooter() {
+    console.log('updateInputDataFooter');
+    $('#input-data-footer').text('Total ' + DATATYPE_NAME[gDataType] + 's: ' + gaInputData.length);
+}
+
+/* Update the output data display based on the current value of gaOutputData. */
+function updateOutputDataDisplay() {
+    console.log('updateOutputDataDisplay');
+
+    var s = '';
+    for (var i = 0; i < gaOutputData.length; i++) {
+        var obj = gaOutputData[i];
+        s += (obj.value + '=' + obj.count + ', ');
+    }
+
+    $('#output-data').text(s);
+}
+
+/* Update the input data footer based on the current value of gaInputData. */
+function updateOutputDataFooter() {
+    console.log('updateOutputDataFooter');
+    $('#output-data-footer').text('Total nodes: ' + gaOutputData.length);
+}
+

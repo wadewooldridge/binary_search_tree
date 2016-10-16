@@ -9,6 +9,9 @@
 /* Global data */
 
 /* Abstract class. */
+// TODO: Need to abstract this, and pass in or choose a comparator function for it.
+
+// TODO: Add findNode and deleteNode functionality.
 
 function BinarySearchTree() {
     // Constructor function for overall tree.
@@ -84,6 +87,30 @@ function BinarySearchTree() {
             console.log('printTree:');
             this.printNode(this.root);
         }
+    }
+
+    // Traverse the tree, calling back to the user for each node.
+    this.traverseAndCallBack = function(callback, currentNode) {
+        console.log('traverseAndCallBack');
+
+        // If this was called with no currentNode parameter, start at the root.
+        if (currentNode === undefined) {
+            currentNode = this.root;
+        }
+
+        // Process the left side.
+        if (currentNode.left !== null) {
+            this.traverseAndCallBack(callback, currentNode.left);
+        }
+
+        // Process the node itself.
+        callback({value: currentNode.value, count: currentNode.count});
+
+        // Process the right side.
+        if (currentNode.right !== null) {
+            this.traverseAndCallBack(callback, currentNode.right);
+        }
+
     }
 }
 
