@@ -46,7 +46,7 @@ function addControlPanelHandlers() {
     $('#graph-button').click(onGraphButton);
     $('#print-button').click(onPrintButton);
 
-    $('#add-file-button button').click(onAddFileButton);
+    $('#add-file-input').change(onAddFileInputChange);
     $('#add-manual-button button').click(onAddManualButton);
     $('#add-random-button button').click(onAddRandomButton);
     $('#add-url-button button').click(onAddUrlButton);
@@ -158,8 +158,23 @@ function initTree() {
 }
 
 /* Button handler: add-file-button */
-function onAddFileButton() {
-    console.log('onAddFileButton');
+function onAddFileInputChange() {
+    console.log('onAddFileInputChange');
+    var file = $(this).get(0).files[0];
+    var textType = /text.*/;
+
+    if (file.type.match(textType)) {
+        var reader = new FileReader();
+
+        reader.onload = function() {
+            var contents = reader.result;
+            parseStringToInputData(contents);
+        }
+
+        reader.readAsText(file);
+    } else {
+        console.log('onAddFileInputChange: file type not supported')
+    }
 }
 
 /* Button handler: add-manual-button */

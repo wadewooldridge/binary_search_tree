@@ -59,7 +59,7 @@ body {
     margin-bottom: 2px;
 }
 
-#control-panel input[type=text] {
+#control-panel input[type=text], #control-panel input[type=file] {
     width: 70%;
 }
 
