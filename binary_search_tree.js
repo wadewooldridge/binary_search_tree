@@ -122,4 +122,3 @@ function wordNode(word) {
     this.left = null;
     this.right = null;
 }
-
