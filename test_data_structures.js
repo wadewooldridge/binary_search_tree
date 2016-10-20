@@ -1,5 +1,5 @@
 /*
- *  test_bst.js - Test implementation of BST in JavaScript.
+ *  test_data_structures.js - Test implementation of data structures in JavaScript.
  *  Featuring abstract BinarySearchTree class with numeric and string parents.
  *  Copyright (C) 2016 by Wade Wooldridge
  */
